@@ -1,6 +1,7 @@
 export LINTER_VERSION ?= 1.53.3
 
 GO_PACKAGES ?= $(shell go list ./... | grep -v 'examples\|qtest\|mock')
+UNAME       := $(shell uname)
 
 MIGRATION_TOOL_EXISTS = 0
 ifneq ("$(wildcard $(CUR_DIR)/bin/migrate)","")
@@ -29,11 +30,11 @@ else
 	@echo "Your OS is not supported."
 endif
 
-create_migration: tool-migrate
-	${CUR_DIR}/bin/migrate create -ext sql -dir ${CUR_DIR}/migrations/ $(NAME)
+create-migration: tool-migrate
+	bin/migrate create -ext sql -dir migrations/ $(NAME)
 
 migrate: tool-migrate
-	${CUR_DIR}/bin/migrate -path ${CUR_DIR}/migrations/ -database "$(DB)" -verbose up
+	bin/migrate -path migrations/ -database "$(DB)" -verbose up
 
 test:
 	@go test -race -v ${GO_PACKAGES}
