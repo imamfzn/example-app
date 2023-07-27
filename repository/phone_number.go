@@ -6,18 +6,18 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type phoneNumberRepository struct {
+type PhoneNumberRepository struct {
 	db *sqlx.DB
 }
 
-func NewPhoneNumberRepository(db *sqlx.DB) *phoneNumberRepository {
-	return &phoneNumberRepository{db}
+func NewPhoneNumberRepository(db *sqlx.DB) *PhoneNumberRepository {
+	return &PhoneNumberRepository{db}
 }
 
-func (r *phoneNumberRepository) Create(pn entity.PhoneNumber) error {
+func (r *PhoneNumberRepository) Create(pn entity.PhoneNumber) error {
 	return nil
 }
 
-func (r *phoneNumberRepository) Exists(pn entity.PhoneNumber) (bool, error) {
+func (r *PhoneNumberRepository) Exists(pn entity.PhoneNumber) (bool, error) {
 	return false, nil
 }
