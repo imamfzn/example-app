@@ -7,7 +7,7 @@ import (
 )
 
 type DBConfig struct {
-	Database     string `envconfig:"DATABASE" default:"postgres"`
+	Database     string `envconfig:"DATABASE" default:"telefun"`
 	Driver       string `envconfig:"DRIVER" default:"postgres"`
 	Host         string `envconfig:"HOST" default:"127.0.0.1"`
 	MaxIdleConns int    `envconfig:"MAX_IDLE_CONNS" default:"5"` // minute
