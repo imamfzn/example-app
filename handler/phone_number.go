@@ -34,7 +34,7 @@ func (h *PhoneNumberHandler) Create(c *gin.Context) {
 }
 
 func (h *PhoneNumberHandler) Available(c *gin.Context) {
-	available, err := h.usecase.Available(c.Query("phone_number"))
+	available, err := h.usecase.Available(c.Request.Context(), c.Query("phone_number"))
 	if err != nil {
 		h.handleError(c, err)
 		return

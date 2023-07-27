@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"context"
 	"telefun/entity"
 	"telefun/repository"
 )
@@ -17,13 +18,13 @@ func (u *PhoneNumberUsecase) Create(number string) (entity.PhoneNumber, error) {
 	return entity.PhoneNumber{}, nil
 }
 
-func (u *PhoneNumberUsecase) Available(number string) (bool, error) {
+func (u *PhoneNumberUsecase) Available(ctx context.Context, number string) (bool, error) {
 	pn, err := entity.ParsePhoneNumber(number)
 	if err != nil {
 		return false, err
 	}
 
-	exists, err := u.repo.Exists(pn)
+	exists, err := u.repo.Exists(ctx, pn)
 	if err != nil {
 		return false, err
 	}
