@@ -12,10 +12,11 @@ const (
 )
 
 var (
-	ErrInvalidProvider = errors.New("Provider is not recognized")
-	ErrInvalidLength   = errors.New("Invalid phone number length")
-	ErrInvalidRegion   = errors.New("Region is not supported")
-	ErrInvalidFormat   = errors.New("Invalid phone number format")
+	ErrEmptyPhoneNumber = errors.New("Phone number is empty")
+	ErrInvalidProvider  = errors.New("Provider is not recognized")
+	ErrInvalidLength    = errors.New("Invalid phone number length")
+	ErrInvalidRegion    = errors.New("Region is not supported")
+	ErrInvalidFormat    = errors.New("Invalid phone number format")
 )
 
 var cutPrefixes = []string{"08", "628", "+628"}
@@ -30,6 +31,10 @@ type PhoneNumber struct {
 // 628...
 // +628....
 func ParsePhoneNumber(number string) (PhoneNumber, error) {
+	if number == "" {
+		return PhoneNumber{}, ErrEmptyPhoneNumber
+	}
+
 	var found bool
 	for _, prefix := range cutPrefixes {
 		number, found = strings.CutPrefix(number, prefix)

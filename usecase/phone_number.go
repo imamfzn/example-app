@@ -18,5 +18,14 @@ func (u *PhoneNumberUsecase) Create(number string) (entity.PhoneNumber, error) {
 }
 
 func (u *PhoneNumberUsecase) Available(number string) (bool, error) {
-	return false, nil
+	pn, err := entity.ParsePhoneNumber(number)
+	if err != nil {
+		return false, err
+	}
+
+	exists, err := u.repo.Exists(pn)
+	if err != nil {
+		return false, err
+	}
+	return !exists, nil
 }

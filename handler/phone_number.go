@@ -34,12 +34,6 @@ func (h *PhoneNumberHandler) Create(c *gin.Context) {
 }
 
 func (h *PhoneNumberHandler) Available(c *gin.Context) {
-	req := CreatePhoneNumberRequest{}
-	if err := c.BindJSON(&req); err != nil {
-		h.handleError(c, errors.New("invalid request body"))
-		return
-	}
-
 	available, err := h.usecase.Available(c.Query("phone_number"))
 	if err != nil {
 		h.handleError(c, err)
