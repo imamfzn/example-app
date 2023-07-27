@@ -56,7 +56,3 @@ func (h *PhoneNumberHandler) handleError(c *gin.Context, err error) {
 func (h *PhoneNumberHandler) handleSuccess(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, BuildSuccessResponse(data))
 }
-
-func (h *PhoneNumberHandler) handleSuccessMsg(c *gin.Context, msg string) {
-	c.JSON(http.StatusOK, BuildSuccessMessage(msg))
-}
