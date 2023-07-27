@@ -1,1 +1,1 @@
-# example-app
+# service-example-vm
