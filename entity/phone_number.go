@@ -17,6 +17,7 @@ var (
 	ErrInvalidLength    = errors.New("Invalid phone number length")
 	ErrInvalidRegion    = errors.New("Region is not supported")
 	ErrInvalidFormat    = errors.New("Invalid phone number format")
+	ErrPhoneNumberTaken = errors.New("Phone number already taken")
 )
 
 var cutPrefixes = []string{"08", "628", "+628"}

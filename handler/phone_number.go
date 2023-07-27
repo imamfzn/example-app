@@ -24,7 +24,7 @@ func (h *PhoneNumberHandler) Create(c *gin.Context) {
 		return
 	}
 
-	pn, err := h.usecase.Create(req.PhoneNumber)
+	pn, err := h.usecase.Create(c.Request.Context(), req.PhoneNumber)
 	if err != nil {
 		h.handleError(c, err)
 		return

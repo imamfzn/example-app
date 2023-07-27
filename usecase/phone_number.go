@@ -14,8 +14,16 @@ func NewPhoneNumberUsecase(repo *repository.PhoneNumberRepository) *PhoneNumberU
 	return &PhoneNumberUsecase{repo}
 }
 
-func (u *PhoneNumberUsecase) Create(number string) (entity.PhoneNumber, error) {
-	return entity.PhoneNumber{}, nil
+func (u *PhoneNumberUsecase) Create(ctx context.Context, number string) (entity.PhoneNumber, error) {
+	pn, err := entity.ParsePhoneNumber(number)
+	if err != nil {
+		return entity.PhoneNumber{}, err
+	}
+
+	if err := u.repo.Create(ctx, pn); err != nil {
+		return entity.PhoneNumber{}, err
+	}
+	return pn, nil
 }
 
 func (u *PhoneNumberUsecase) Available(ctx context.Context, number string) (bool, error) {
