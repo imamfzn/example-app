@@ -8,8 +8,8 @@ import (
 )
 
 type Config struct {
-	HTTP_SERVER HttpServerConfig `envconfig:"HTTP_SERVER"`
-	DB          DBConfig         `envconfig:"DB"`
+	HttpServer HttpServerConfig `envconfig:"HTTP_SERVER"`
+	DB         DBConfig         `envconfig:"DB"`
 }
 
 func Load() (Config, error) {
