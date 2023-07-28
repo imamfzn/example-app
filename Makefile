@@ -2,6 +2,8 @@ export LINTER_VERSION ?= 1.53.3
 
 GO_PACKAGES ?= $(shell go list ./... | grep -v 'examples\|qtest\|mock')
 UNAME       := $(shell uname)
+GOOS		?= linux
+GOARCH		?= amd64
 
 MIGRATION_TOOL_EXISTS = 0
 ifneq ("$(wildcard $(CUR_DIR)/bin/migrate)","")
@@ -44,3 +46,6 @@ dep:
 
 tidy:
 	@go mod tidy
+
+compile:
+	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o deploy/_output/$(SVC) cmd/$(SVC)/main.go
