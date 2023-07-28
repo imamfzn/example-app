@@ -29,7 +29,7 @@ func main() {
 	r.POST("/v1/phone_numbers", handler.Create)
 	r.GET("/v1/phone_numbers/available", handler.Available)
 
-	if err := r.Run(cfg.HttpServer.Addr); err != nil {
+	if err := r.Run(cfg.HttpServer.Addr()); err != nil {
 		panic(err)
 	}
 }

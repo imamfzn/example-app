@@ -1,5 +1,12 @@
 package config
 
+import "fmt"
+
 type HttpServerConfig struct {
-	Addr string `envconfig:"ADDR" default:"127.0.0.1:8080"`
+	Host string `envconfig:"HOST" default:"127.0.0.1"`
+	Port int    `envconfig:"PORT" default:"8080"`
+}
+
+func (c HttpServerConfig) Addr() string {
+	return fmt.Sprintf("%s:%d", c.Host, c.Port)
 }
