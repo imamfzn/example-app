@@ -47,7 +47,7 @@ func main() {
 	log.Println("Will start generating from ", i)
 
 	start := time.Now()
-	for i = 0; i < 10_000_000; i++ {
+	for ; i < 10_000_000; i++ {
 		for _, provider := range providers {
 			num := fmt.Sprintf("%s%07d", provider.prefix, i)
 			pn, _ := entity.ParsePhoneNumber(num)
