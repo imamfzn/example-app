@@ -15,6 +15,11 @@ type PhoneNumberRepository struct {
 	db *sqlx.DB
 }
 
+type phoneNumber struct {
+	Number   string `db:"number"`
+	Provider string `db:"provider"`
+}
+
 func NewPhoneNumberRepository(db *sqlx.DB) *PhoneNumberRepository {
 	return &PhoneNumberRepository{db}
 }
@@ -41,4 +46,15 @@ func (r *PhoneNumberRepository) Exists(ctx context.Context, pn entity.PhoneNumbe
 		return false, err
 	}
 	return true, nil
+}
+
+func (r *PhoneNumberRepository) BulkCreate(ctx context.Context, pns []entity.PhoneNumber) error {
+	rows := make([]phoneNumber, len(pns))
+	for i, pn := range pns {
+		rows[i] = phoneNumber{Number: pn.Get(), Provider: pn.Provider()}
+	}
+
+	query := `INSERT INTO phone_numbers (number, provider) VALUES (:number, :provider) ON CONFLICT (number) DO NOTHING`
+	_, err := r.db.NamedExecContext(ctx, query, rows)
+	return err
 }
