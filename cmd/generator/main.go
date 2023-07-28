@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
+	"strconv"
 	"time"
 
 	"telefun/config"
@@ -41,6 +43,9 @@ func main() {
 	var i, count uint64
 	var numbers []entity.PhoneNumber
 
+	i, _ = strconv.ParseUint(os.Getenv("START"), 10, 64)
+	log.Println("Will start generating from ", i)
+
 	start := time.Now()
 	for i = 0; i < 10_000_000; i++ {
 		for _, provider := range providers {
@@ -59,7 +64,7 @@ func main() {
 				log.Println(err)
 			}
 
-			time.Sleep(99 * time.Millisecond)
+			time.Sleep(59 * time.Millisecond)
 
 			// reset
 			count = 0
