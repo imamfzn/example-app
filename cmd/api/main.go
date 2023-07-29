@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"telefun/config"
 	"telefun/handler"
 	"telefun/repository"
@@ -28,6 +30,8 @@ func main() {
 	r := gin.Default()
 	r.POST("/v1/phone_numbers", handler.Create)
 	r.GET("/v1/phone_numbers/available", handler.Available)
+
+	log.Println("Telefun api is running on", cfg.HttpServer.Addr())
 
 	if err := r.Run(cfg.HttpServer.Addr()); err != nil {
 		panic(err)
