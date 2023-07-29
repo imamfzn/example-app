@@ -1,0 +1,11 @@
+upstream api {
+    server 127.0.0.1:8080;
+    server 127.0.0.1:8081;
+}
+
+server {
+    server_name fznlabs.xyz api.fznlabs.xyz;
+    location / {
+        proxy_pass http://api;
+    }
+}

@@ -1,0 +1,6 @@
+server {
+    server_name fznlabs.xyz api.fznlabs.xyz
+    location / {
+        proxy_pass http: //localhost:8080;
+    }
+}
