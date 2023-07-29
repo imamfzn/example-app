@@ -26,4 +26,6 @@ To compile the api:
 
 ```sh
 GOOS=linux GOARCH=amd64 go build -o deploy/_output/api cmd/api/main.go
+
+chmod +x deploy/_output/api
 ```
